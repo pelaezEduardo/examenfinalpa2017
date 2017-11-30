@@ -1,7 +1,7 @@
 package gt.edu.url.problema3;
 
 
-public class CircularLinkedList<E> {
+public class CircularLinkedList<E>  {
 	private static class Node<E>{
 		private E element;
 		private Node<E> next;

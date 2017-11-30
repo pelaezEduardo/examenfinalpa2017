@@ -11,15 +11,17 @@ public class ImplLeakyStack<E>  extends CircularLinkedList<E> implements LeakySt
 
 	@Override
 	public E saveHistory(E e) {
-		E auxiliar = e;			
+		E auxiliar = (E) new Animal((Animal)e);	
+                int cont = 0;
 		
-		if(isEmpty()) {
-			addLast(auxiliar);		
-		}else {
-			undo();
-			addLast(auxiliar);
-		}
-		return auxiliar;
+			if(cont < limite) {
+				addLast(auxiliar);
+                                return auxiliar;
+			}else {
+				removeFirst();
+				addLast(auxiliar);
+                                return auxiliar;
+			}                       	
 	}
 
 	@Override
@@ -29,7 +31,10 @@ public class ImplLeakyStack<E>  extends CircularLinkedList<E> implements LeakySt
 	
 	@Override
 	public E undo() {
-			return removeFirst();
+            if (this.size() == 0) 
+                throw new IllegalArgumentException("Argumento invalido");
+            rotate();
+            return removeFirst();
 	}
 
 	@Override
